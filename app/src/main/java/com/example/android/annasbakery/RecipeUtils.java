@@ -1,9 +1,16 @@
 package com.example.android.annasbakery;
 
+// Class for utilities
 public class RecipeUtils {
 
+    // Private constructor because we don't want to create an instance of this class
     private RecipeUtils() {}
 
+    /*
+     * Find the corresponding stock image for a recipe
+     * @param name: the name of the cake
+     * @return int: the resource id of the correct image
+     */
     public static int findCorrectStockImage(String name) {
         switch (name){
             case "Brownies":

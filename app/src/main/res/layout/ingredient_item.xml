@@ -2,14 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
-    android:gravity="center_vertical"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/ingredient_item_height">
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/default_vertical_spacing"
+    android:paddingBottom="@dimen/default_vertical_spacing">
+    <ImageView
+        android:layout_width="@dimen/ingredient_tick_height"
+        android:layout_height="@dimen/ingredient_tick_height"
+        android:src="@drawable/ic_action_tick"
+        android:tint="@color/colorAccent"
+        />
     <TextView
         android:id="@+id/ingredient_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:singleLine="true"
+        android:layout_marginStart="@dimen/smaller_horizontal_spacing"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         tools:text="6 spoons parsley"/>
 
 </LinearLayout>

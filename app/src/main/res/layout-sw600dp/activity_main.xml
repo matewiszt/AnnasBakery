@@ -35,7 +35,8 @@
         android:id="@+id/recipe_detail_layout"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2">
+        android:layout_weight="2"
+        android:paddingStart="@dimen/larger_horizontal_spacing">
 
         <FrameLayout
             android:id="@+id/recipe_detail_container"

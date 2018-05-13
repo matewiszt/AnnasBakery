@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 public class RecipeListFragment extends Fragment {
 
     private RecipeListAdapter mAdapter;
+    private int mGridNumber = 2;
     @BindView(R.id.recipe_list_rv) RecyclerView mRecyclerView;
 
     // Public constructor
@@ -32,7 +33,7 @@ public class RecipeListFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         // Set the LayoutManager and the Adapter for the RecyclerView
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), mGridNumber, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -45,5 +46,13 @@ public class RecipeListFragment extends Fragment {
      */
     public void setAdapter(RecipeListAdapter adapter){
         mAdapter = adapter;
+    }
+
+    /*
+     * Set the grid number for GridView
+     * @param numberOfGrids: the number of grids
+     */
+    public void setGridNumber(int numberOfGrids){
+        mGridNumber = numberOfGrids;
     }
 }

@@ -2,6 +2,7 @@ package com.example.android.annasbakery;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -103,8 +104,11 @@ public class MainActivity extends AppCompatActivity
         RecipeListAdapter adapter = new RecipeListAdapter(this, this);
         RecipeListFragment listFragment = new RecipeListFragment();
         adapter.setRecipeData(mRecipes);
+        if (mHasTwoPane && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            listFragment.setGridNumber(1);
+        }
         listFragment.setAdapter(adapter);
-        getSupportFragmentManager().beginTransaction().add(R.id.recipe_list_container, listFragment).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().replace(R.id.recipe_list_container, listFragment).commitAllowingStateLoss();
 
         //If we have two panes, create a new RecipeDetailFragment with the first recipe, too
         if (mHasTwoPane) {
@@ -115,7 +119,7 @@ public class MainActivity extends AppCompatActivity
             detailFragment.setRecipe(currentRecipe);
             stepAdapter.setData(currentRecipe.getSteps());
             detailFragment.setStepAdapter(stepAdapter);
-            getSupportFragmentManager().beginTransaction().add(R.id.recipe_detail_container, detailFragment).commitAllowingStateLoss();
+            getSupportFragmentManager().beginTransaction().replace(R.id.recipe_detail_container, detailFragment).commitAllowingStateLoss();
 
         }
 
