@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_horizontal_spacing">12dp</dimen>
+    <dimen name="default_vertical_spacing">12dp</dimen>
+    <dimen name="larger_horizontal_spacing">16dp</dimen>
+    <dimen name="larger_vertical_spacing">16dp</dimen>
+    <dimen name="recipe_item_height">280dp</dimen>
+    <dimen name="recipe_item_image_height">220dp</dimen>
+    <dimen name="recipe_detail_image_height">200dp</dimen>
+    <dimen name="ingredient_item_height">40dp</dimen>
+    <dimen name="step_item_height">60dp</dimen>
+</resources>

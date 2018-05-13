@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/recipe_item_height">
+    <ImageView
+        android:id="@+id/recipe_list_item_iv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/recipe_item_image_height"
+        android:layout_marginBottom="@dimen/default_vertical_spacing"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/recipe_image_placeholder"/>
+    <TextView
+        android:id="@+id/recipe_list_item_name_tv"
+        android:layout_below="@id/recipe_list_item_iv"
+        style="@style/TitlePrimary"
+        tools:text="My Cake"/>
+
+</RelativeLayout>

@@ -1,0 +1,8 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Anna\'s Bakery</string>
+    <string name="recipe_detail_ingredients_label">Ingredients</string>
+    <string name="recipe_detail_steps_label">Steps</string>
+    <string name="recipe_detail_servings_text"><xliff:g id="title">for %1$d </xliff:g></string>
+    <string name="recipe_ingredients_text"><xliff:g id="title">%1$.1f %2$s %3$s</xliff:g></string>
+    <string name="no_internet_text">There is no internet, please check your connection.</string>
+</resources>

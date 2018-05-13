@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/recipe_detail_iv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/recipe_detail_image_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/brownie" />
+
+        <TextView
+            android:id="@+id/recipe_detail_name_tv"
+            style="@style/TitlePrimary"
+            android:layout_below="@id/recipe_detail_iv"
+            android:layout_marginTop="@dimen/default_vertical_spacing"
+            tools:text="Recipe name" />
+
+        <TextView
+            android:id="@+id/recipe_detail_ingredients_label_tv"
+            style="@style/SubtitlePrimary"
+            android:layout_below="@id/recipe_detail_name_tv"
+            android:paddingStart="@dimen/default_horizontal_spacing"
+            android:text="@string/recipe_detail_ingredients_label" />
+
+        <TextView
+            android:id="@+id/recipe_detail_servings_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recipe_detail_ingredients_label_tv"
+            android:layout_marginBottom="@dimen/default_vertical_spacing"
+            android:drawableEnd="@drawable/ic_person_outline"
+            android:drawableTint="@color/colorAccent"
+            android:paddingStart="@dimen/default_horizontal_spacing"
+            tools:text="for 4" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recipe_ingredients_rv"
+            style="@style/DetailList"
+            android:layout_below="@id/recipe_detail_servings_tv" />
+
+        <TextView
+            android:id="@+id/recipe_detail_steps_label_tv"
+            style="@style/SubtitlePrimary"
+            android:layout_below="@id/recipe_ingredients_rv"
+            android:paddingStart="@dimen/default_horizontal_spacing"
+            android:text="@string/recipe_detail_steps_label" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recipe_steps_rv"
+            style="@style/DetailList"
+            android:layout_below="@id/recipe_detail_steps_label_tv" />
+
+    </RelativeLayout>
+</ScrollView>
