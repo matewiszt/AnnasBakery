@@ -1,5 +1,6 @@
 package com.example.android.annasbakery;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -44,6 +45,10 @@ public class DetailActivity extends AppCompatActivity implements StepAdapter.Ste
     // Handle the clicks on the Step items
     @Override
     public void onStepClickHandler(Step step) {
-
+        Intent stepLaunchIntent = new Intent(DetailActivity.this, StepActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(MainActivity.STEP_KEY, step);
+        stepLaunchIntent.putExtras(bundle);
+        startActivity(stepLaunchIntent);
     }
 }

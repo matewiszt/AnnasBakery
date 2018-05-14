@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity
         StepAdapter.StepClickHandler {
 
     public static final String DETAIL_KEY = "detail";
+    public static final String STEP_KEY = "step";
     private boolean mHasTwoPane;
     private ArrayList<Recipe> mRecipes;
 
@@ -178,7 +179,11 @@ public class MainActivity extends AppCompatActivity
     // Handle the clicks on the step items
     @Override
     public void onStepClickHandler(Step step) {
-
+        Intent stepLaunchIntent = new Intent(MainActivity.this, StepActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(STEP_KEY, step);
+        stepLaunchIntent.putExtras(bundle);
+        startActivity(stepLaunchIntent);
     }
 
     // Show the ProgressBar, hide the list container and the empty view
