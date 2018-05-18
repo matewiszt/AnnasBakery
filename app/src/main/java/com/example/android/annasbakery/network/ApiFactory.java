@@ -16,10 +16,10 @@ public class ApiFactory {
     private ApiFactory() {}
 
     // The base URL of our API endpoint
-    private static final String BASE_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/";
+    public static final String BASE_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/";
 
     // The interface of our ApiFactory
-    private interface RecipeApiFactory {
+    public interface RecipeApiFactory {
 
         // Create a call with method GET with the given endpoint
         @GET("baking.json")
