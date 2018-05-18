@@ -12,29 +12,30 @@ import com.example.android.annasbakery.ui.StepAdapter;
 // Shows the details of a selected recipe
 public class DetailActivity extends AppCompatActivity implements StepAdapter.StepClickHandler {
 
+    private Recipe mRecipe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
         // Activate up navigation
-        if (getActionBar() != null) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         //Get the recipe data from the intent extras
         Bundle extras = getIntent().getExtras();
-        Recipe recipe;
         if (extras != null) {
-            recipe = extras.getParcelable(MainActivity.DETAIL_KEY);
+            mRecipe = extras.getParcelable(MainActivity.DETAIL_KEY);
 
             // Create a new RecipeDetailFragment instance with the recipe got from the intent
-            if (recipe != null) {
-                setTitle(recipe.getName());
+            if (mRecipe != null) {
+                setTitle(mRecipe.getName());
                 RecipeDetailFragment fragment = new RecipeDetailFragment();
                 StepAdapter stepAdapter = new StepAdapter(this, this);
-                fragment.setRecipe(recipe);
-                stepAdapter.setData(recipe.getSteps());
+                fragment.setRecipe(mRecipe);
+                stepAdapter.setData(mRecipe.getSteps());
                 fragment.setStepAdapter(stepAdapter);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.recipe_detail_container, fragment).commit();
@@ -45,9 +46,11 @@ public class DetailActivity extends AppCompatActivity implements StepAdapter.Ste
     // Handle the clicks on the Step items
     @Override
     public void onStepClickHandler(Step step) {
+        // Launch the StepActivity on step click
         Intent stepLaunchIntent = new Intent(DetailActivity.this, StepActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(MainActivity.STEP_KEY, step);
+        bundle.putParcelable(MainActivity.DETAIL_KEY, mRecipe);// Pass also the Recipe object for later use
         stepLaunchIntent.putExtras(bundle);
         startActivity(stepLaunchIntent);
     }

@@ -94,11 +94,13 @@ public class RecipeDetailFragment extends Fragment {
         ingredientAdapter.setData(mRecipe.getIngredients());
         LinearLayoutManager ingredientLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mIngredientsRecyclerView.setLayoutManager(ingredientLayoutManager);
+        mIngredientsRecyclerView.setNestedScrollingEnabled(false);
         mIngredientsRecyclerView.setAdapter(ingredientAdapter);
 
         // Instantiate a StepAdapter and set it to the RecyclerView
         LinearLayoutManager stepLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mStepsRecyclerView.setLayoutManager(stepLayoutManager);
+        mStepsRecyclerView.setNestedScrollingEnabled(false);
         mStepsRecyclerView.setAdapter(mStepAdapter);
 
         return rootView;

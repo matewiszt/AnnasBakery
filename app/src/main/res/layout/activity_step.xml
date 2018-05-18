@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.android.annasbakery.StepActivity">
+
+    <LinearLayout
+        android:id="@+id/step_highlight_layout"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/default_vertical_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/step_exoplayer_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="240dp"/>
 
-</LinearLayout>
+    <ImageView
+        android:visibility="gone"
+        android:scaleType="centerCrop"
+        android:id="@+id/step_empty_iv"
+        android:layout_width="match_parent"
+        android:layout_height="240dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/step_short_desc_tv"
+        style="@style/TitlePrimary"
+        android:paddingStart="@dimen/default_vertical_spacing"
+        android:paddingEnd="@dimen/default_vertical_spacing"
+        android:layout_below="@id/step_highlight_layout"
+        tools:text="Cooking"/>
+
+    <TextView
+        android:id="@+id/step_desc_tv"
+        style="@style/SubtitlePrimary"
+        android:paddingStart="@dimen/default_vertical_spacing"
+        android:paddingEnd="@dimen/default_vertical_spacing"
+        android:layout_below="@id/step_short_desc_tv"
+        tools:text="Cook the vegetables properly"/>
+
+</RelativeLayout>

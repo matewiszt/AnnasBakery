@@ -36,8 +36,10 @@ public class MainActivity extends AppCompatActivity
 
     public static final String DETAIL_KEY = "detail";
     public static final String STEP_KEY = "step";
-    private boolean mHasTwoPane;
+    public static final String TWO_PANE_KEY = "two_pane";
+    private boolean mHasTwoPane = false;
     private ArrayList<Recipe> mRecipes;
+    private Recipe mRecipe;
 
     @BindView(R.id.recipe_list_container)
     FrameLayout mListContainer;
@@ -59,6 +61,11 @@ public class MainActivity extends AppCompatActivity
 
         // Show the ProgressBar until we try to load the data
         showProgressBar();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.containsKey(DETAIL_KEY)){
+            mRecipe = extras.getParcelable(DETAIL_KEY);
+        }
 
         // Check if the device is connected to the internet
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -116,9 +123,9 @@ public class MainActivity extends AppCompatActivity
 
             RecipeDetailFragment detailFragment = new RecipeDetailFragment();
             StepAdapter stepAdapter = new StepAdapter(this, this);
-            Recipe currentRecipe = mRecipes.get(0);
-            detailFragment.setRecipe(currentRecipe);
-            stepAdapter.setData(currentRecipe.getSteps());
+            mRecipe = mRecipes.get(0);
+            detailFragment.setRecipe(mRecipe);
+            stepAdapter.setData(mRecipe.getSteps());
             detailFragment.setStepAdapter(stepAdapter);
             getSupportFragmentManager().beginTransaction().replace(R.id.recipe_detail_container, detailFragment).commitAllowingStateLoss();
 
@@ -154,13 +161,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onRecipeClickHandler(Recipe recipe) {
 
+        mRecipe = recipe;
+
         // If we have two panes, replace the actual RecipeDetailFragment with the clicked one
         if (mHasTwoPane) {
 
             RecipeDetailFragment detailFragment = new RecipeDetailFragment();
             StepAdapter stepAdapter = new StepAdapter(this, this);
-            detailFragment.setRecipe(recipe);
-            stepAdapter.setData(recipe.getSteps());
+            detailFragment.setRecipe(mRecipe);
+            stepAdapter.setData(mRecipe.getSteps());
             detailFragment.setStepAdapter(stepAdapter);
             getSupportFragmentManager().beginTransaction().replace(R.id.recipe_detail_container, detailFragment).commit();
 
@@ -179,9 +188,14 @@ public class MainActivity extends AppCompatActivity
     // Handle the clicks on the step items
     @Override
     public void onStepClickHandler(Step step) {
+        // Launch the StepActivity on step click
         Intent stepLaunchIntent = new Intent(MainActivity.this, StepActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(STEP_KEY, step);
+        bundle.putParcelable(DETAIL_KEY, mRecipe); // Pass also the Recipe object for later use
+        if (mHasTwoPane) {
+            bundle.putBoolean(TWO_PANE_KEY, mHasTwoPane);
+        }
         stepLaunchIntent.putExtras(bundle);
         startActivity(stepLaunchIntent);
     }
