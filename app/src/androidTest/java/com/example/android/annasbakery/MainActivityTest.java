@@ -2,7 +2,6 @@ package com.example.android.annasbakery;
 
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -30,7 +29,6 @@ import retrofit2.mock.MockRetrofit;
 import retrofit2.mock.NetworkBehavior;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -46,7 +44,7 @@ import static org.hamcrest.Matchers.not;
 public class MainActivityTest {
 
     // This is the name of our mock cake
-    public static final String CAKE_NAME = "Nutella Pie";
+    private static final String CAKE_NAME = "Nutella Pie";
     private static final Intent MY_ACTIVITY_INTENT = new Intent(InstrumentationRegistry.getTargetContext(), MainActivity.class);
 
     // This is a mock API Factory for testing
@@ -143,19 +141,5 @@ public class MainActivityTest {
         // Rotates to portrait and checks the expected data
         TestUtils.rotateScreen(mActivityTestRule.getActivity());
         onView(withId(R.id.recipe_list_rv)).check(matches(hasDescendant(withText(CAKE_NAME))));
-    }
-
-    /**
-     * Test 5: This case performs a click on a recipe list item
-     */
-    @Test
-    public void recipeClick_launchesDetailActivity() {
-
-        // Perform a click on a recipe and check if a DetailActivity with the right cake name is launched
-        onView(withId(R.id.recipe_list_rv))
-                .perform(RecyclerViewActions.actionOnItem(
-                        hasDescendant(withText(CAKE_NAME)), click()));
-
-        onView(withId(R.id.recipe_detail_name_tv)).check(matches(withText(CAKE_NAME)));
     }
 }

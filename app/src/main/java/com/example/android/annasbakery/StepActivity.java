@@ -108,6 +108,7 @@ public class StepActivity extends AppCompatActivity implements ExoPlayer.EventLi
                     } else {
                         mEmptyImageView.setImageResource(RecipeUtils.findCorrectStockImage(mRecipe.getName()));
                         mEmptyImageView.setContentDescription(shortDesc);
+                        mEmptyImageView.setTag(RecipeUtils.findCorrectStockImage(mRecipe.getName()));
                     }
                     mEmptyImageView.setVisibility(View.VISIBLE);
                 }
