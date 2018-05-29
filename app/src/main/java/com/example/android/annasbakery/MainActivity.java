@@ -2,10 +2,12 @@ package com.example.android.annasbakery;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity
         StepAdapter.StepClickHandler {
 
     public static final String DETAIL_KEY = "detail";
+    public static final String DETAIL_POSITION_KEY = "detail_position";
     public static final String STEP_KEY = "step";
     public static final String TWO_PANE_KEY = "two_pane";
     private boolean mHasTwoPane = false;
@@ -173,9 +176,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRecipeClickHandler(Recipe recipe) {
+    public void onRecipeClickHandler(Recipe recipe, int position) {
 
         mRecipe = recipe;
+
+        //No matter if we have one or two panes, save the clicked recipe's position into a preference and notify the widget
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(MainActivity.DETAIL_POSITION_KEY, position);
+        editor.apply();
+        RecipeWidgetProvider.sendUpdateBroadcast(this);
 
         // If we have two panes, replace the actual RecipeDetailFragment with the clicked one
         if (mHasTwoPane) {
