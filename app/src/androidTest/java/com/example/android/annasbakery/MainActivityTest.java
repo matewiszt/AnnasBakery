@@ -5,6 +5,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.example.android.annasbakery.activity.MainActivity;
 import com.example.android.annasbakery.data.Recipe;
 import com.example.android.annasbakery.network.ApiFactory;
 import com.example.android.annasbakery.ui.RecipeListAdapter;

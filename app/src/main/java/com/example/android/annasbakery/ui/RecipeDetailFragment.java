@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.annasbakery.MainActivity;
+import com.example.android.annasbakery.activity.MainActivity;
 import com.example.android.annasbakery.R;
 import com.example.android.annasbakery.RecipeUtils;
 import com.example.android.annasbakery.data.Recipe;

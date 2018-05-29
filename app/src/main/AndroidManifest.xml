@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,26 +22,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetailActivity"
-            android:parentActivityName=".MainActivity">
+            android:name=".activity.DetailActivity"
+            android:parentActivityName=".activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name=".StepActivity"
+            android:name=".activity.StepActivity"
             android:configChanges="orientation|screenSize|layoutDirection"
-            android:parentActivityName=".DetailActivity">
+            android:parentActivityName=".activity.DetailActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DetailActivity" />
+                android:value=".activity.DetailActivity" />
         </activity>
-        <receiver android:name=".StepActivity$RecipeMediaButtonReceiver">
+        <receiver android:name=".activity.StepActivity$RecipeMediaButtonReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".RecipeWidgetProvider">
+        <receiver android:name=".widget.RecipeWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -49,7 +49,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/recipe_widget_info" />
         </receiver>
-        <service android:name=".RecipeRemoteViewsService"
+        <service android:name=".widget.RecipeRemoteViewsService"
         android:permission="android.permission.BIND_REMOTEVIEWS"/>
     </application>
 
