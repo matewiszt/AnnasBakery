@@ -71,7 +71,7 @@ public class DetailActivityTest {
      * Test 3: This case performs a click on a recipe list item and after another on a step item with no video
      */
     @Test
-    public void onDetail() {
+    public void onStepLaunch_withoutVideo() {
 
         // Click on a recipe, launch the DetailActivity
         onView(withId(R.id.recipe_list_rv))
