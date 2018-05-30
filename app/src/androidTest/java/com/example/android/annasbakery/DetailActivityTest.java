@@ -1,14 +1,15 @@
 package com.example.android.annasbakery;
 
-import android.content.Intent;
-import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.android.annasbakery.activity.DetailActivity;
 import com.example.android.annasbakery.activity.MainActivity;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,11 +28,16 @@ public class DetailActivityTest {
 
     private static final String CAKE_NAME = "Nutella Pie";
     private static final String STEP_SHORT_DESC = "Recipe Introduction";
-    private static final Intent DETAIL_ACTIVITY_INTENT = new Intent(InstrumentationRegistry.getTargetContext(), DetailActivity.class);
-    private static final Intent MAIN_ACTIVITY_INTENT = new Intent(InstrumentationRegistry.getTargetContext(), MainActivity.class);
+    private IdlingResource mIdlingResource;
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+
+    @Before
+    public void registerIdlingResource() {
+        mIdlingResource = mActivityTestRule.getActivity().getIdlingInstance();
+        Espresso.registerIdlingResources(mIdlingResource);
+    }
 
     /**
      * Test 1: This case performs a click on a recipe list item
@@ -90,5 +96,12 @@ public class DetailActivityTest {
 
         // Check if the empty ImageView is displayed
         onView(withId(R.id.step_empty_iv)).check(matches(isDisplayed()));
+    }
+
+    @After
+    public void unregisterIdlingResource() {
+        if (mIdlingResource != null) {
+            Espresso.unregisterIdlingResources(mIdlingResource);
+        }
     }
 }

@@ -2,6 +2,8 @@ package com.example.android.annasbakery;
 
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingResource;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -11,7 +13,9 @@ import com.example.android.annasbakery.network.ApiFactory;
 import com.example.android.annasbakery.ui.RecipeListAdapter;
 import com.example.android.annasbakery.ui.RecipeListFragment;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -47,6 +51,7 @@ public class MainActivityTest {
     // This is the name of our mock cake
     private static final String CAKE_NAME = "Nutella Pie";
     private static final Intent MY_ACTIVITY_INTENT = new Intent(InstrumentationRegistry.getTargetContext(), MainActivity.class);
+    private IdlingResource mIdlingResource;
 
     // This is a mock API Factory for testing
     public class MockedRecipeApiFactory implements ApiFactory.RecipeApiFactory {
@@ -65,6 +70,12 @@ public class MainActivityTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+
+    @Before
+    public void registerIdlingResource() {
+        mIdlingResource = mActivityTestRule.getActivity().getIdlingInstance();
+        Espresso.registerIdlingResources(mIdlingResource);
+    }
 
     /**
      * Test 1: This case mocks the response of the API endpoint
@@ -142,5 +153,12 @@ public class MainActivityTest {
         // Rotates to portrait and checks the expected data
         TestUtils.rotateScreen(mActivityTestRule.getActivity());
         onView(withId(R.id.recipe_list_rv)).check(matches(hasDescendant(withText(CAKE_NAME))));
+    }
+
+    @After
+    public void unregisterIdlingResource() {
+        if (mIdlingResource != null) {
+            Espresso.unregisterIdlingResources(mIdlingResource);
+        }
     }
 }

@@ -183,15 +183,17 @@ public class StepActivity extends AppCompatActivity implements ExoPlayer.EventLi
     }
 
     /**
-     * Release the player when the activity is destroyed.
+     * Release the player when the activity is paused
      */
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
         if (mExoPlayer != null) {
             releasePlayer();
         }
-        mMediaSession.setActive(false);
+        if (mMediaSession != null) {
+            mMediaSession.setActive(false);
+        }
     }
 
     @Override
