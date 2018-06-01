@@ -79,24 +79,9 @@ public class MainActivity extends AppCompatActivity
         // If the screen has the detail layout element (only above 600dp screen width), we have two panes
         if (findViewById(R.id.recipe_detail_layout) != null) mHasTwoPane = true;
 
-        // Show the ProgressBar until we try to load the data
-        showProgressBar();
-
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey(DETAIL_KEY)){
             mRecipe = extras.getParcelable(DETAIL_KEY);
-        }
-
-        // Check if the device is connected to the internet
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-
-        // If the device is connected to the internet, load the recipes, otherwise show the empty text
-        if (isConnected) {
-            loadRecipes();
-        } else {
-            showEmptyView();
         }
         getIdlingInstance();
     }
@@ -108,6 +93,7 @@ public class MainActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
+        // Show the ProgressBar until we try to load the data
         showProgressBar();
 
         // Check if the device is connected to the internet
@@ -155,6 +141,9 @@ public class MainActivity extends AppCompatActivity
 
     // Try to make an API call to get the recipe data
     private void loadRecipes() {
+        if (mIdlingResource != null) {
+            mIdlingResource.setIdleState(false);
+        }
 
         // Create a call with the API Factory and implement its callbacks
         Call<ArrayList<Recipe>> call = ApiFactory.getRecipes();
@@ -167,6 +156,9 @@ public class MainActivity extends AppCompatActivity
                 mRecipes = response.body();
                 showList();
                 initFragments();
+                if (mIdlingResource != null) {
+                    mIdlingResource.setIdleState(true);
+                }
             }
 
             @Override
